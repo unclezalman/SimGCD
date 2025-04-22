@@ -6,7 +6,7 @@ from data.stanford_cars import get_scars_datasets
 from data.imagenet import get_imagenet_100_datasets, get_imagenet_1k_datasets
 from data.cub import get_cub_datasets
 from data.fgvc_aircraft import get_aircraft_datasets
-from data.food101 import get_food_101_datasets
+from data.food101 import get_food101_datasets
 
 from copy import deepcopy
 import pickle
