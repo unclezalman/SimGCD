@@ -1,6 +1,7 @@
 # -----------------
 # DATASET ROOTS
 # -----------------
+food101_root = './datasets/food-101'
 cifar_10_root = '${DATASET_DIR}/cifar10'
 cifar_100_root = '${DATASET_DIR}/cifar100'
 cub_root = '${DATASET_DIR}/cub'
