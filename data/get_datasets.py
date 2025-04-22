@@ -15,6 +15,7 @@ from config import osr_split_dir
 
 
 get_dataset_funcs = {
+    'food101': get_food101_datasets,
     'cifar10': get_cifar_10_datasets,
     'cifar100': get_cifar_100_datasets,
     'imagenet_100': get_imagenet_100_datasets,
@@ -169,6 +170,11 @@ def get_class_splits(args):
             args.train_classes = range(100)
             args.unlabeled_classes = range(100, 200)
 
+    elif args.dataset_name == 'food101':
+        args.image_size = 224
+        args.train_classes = range(50)
+        args.unlabeled_classes = range(50, 101)
+        
     else:
 
         raise NotImplementedError
