@@ -3,6 +3,7 @@ import numpy as np
 from copy import deepcopy
 from torchvision.datasets import Food101
 from data.data_utils import subsample_instances
+from config import food101_root
 
 class CustomFood101(Food101):
     def __init__(self, *args, **kwargs):
