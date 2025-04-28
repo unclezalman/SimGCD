@@ -1,7 +1,6 @@
 import argparse
 import os
 import sys 
-sys.path.append("../..") 
 
 import math
 import numpy as np
@@ -11,8 +10,6 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from models import vision_transformer as vits
-from prompters import PadPrompter, PatchPrompter
 
 from data.augmentations import get_transform
 from data.get_datasets import get_datasets, get_class_splits
@@ -20,7 +17,6 @@ from data.get_datasets import get_datasets, get_class_splits
 from util.cluster_and_log_utils import log_accs_from_preds
 from model import DINOHead, info_nce_logits, SupConLoss, DistillLoss, ContrastiveLearningViewGenerator, get_params_groups
 
-from config import clip_pretrain_path, dino_pretrain_path
 
 
 parser = argparse.ArgumentParser(description='cluster', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
