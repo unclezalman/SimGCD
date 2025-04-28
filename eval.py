@@ -19,6 +19,7 @@ from model import DINOHead, info_nce_logits, SupConLoss, DistillLoss, Contrastiv
 
 
 
+
 parser = argparse.ArgumentParser(description='cluster', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--batch_size', default=128, type=int)
 parser.add_argument('--num_workers', default=8, type=int)
@@ -92,6 +93,14 @@ def load_model(args):
     # ----------------------
     projector = DINOHead(in_dim=args.feat_dim, out_dim=args.mlp_out_dim, nlayers=args.num_mlp_layers)
     model = nn.Sequential(backbone, projector).cuda()
+
+    print(f"Loading model from {args.pretrained_model_path}")
+    state_dict = torch.load(args.pretrained_model_path, map_location="cpu")
+    
+    if 'model' in state_dict:
+        model.load_state_dict(state_dict['model'])
+    else:
+        model.load_state_dict(state_dict)
     
     model.eval()
     return model
@@ -125,10 +134,10 @@ if __name__ == "__main__":
         shuffle=False, 
         pin_memory=False
     )
-
-  
+    
     # ----------------------
     # EVAL
     # ----------------------
+    print("\nEvaluating on unlabelled train examples:")
     all_acc, old_acc, new_acc = test(model, test_loader_unlabelled, save_name='Eval ACC Unlabelled', args=args)
-    print('Best Accuracies: All {:.4f} | Old {:.4f} | New {:.4f}'.format(all_acc, old_acc, new_acc))
+    print('Unlabelled Train Accuracies: All {:.4f} | Old {:.4f} | New {:.4f}'.format(all_acc, old_acc, new_acc))
